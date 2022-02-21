@@ -1,0 +1,3 @@
+[submodule "src/awesome"]
+	path = src/awesome
+	url = https://github.com/songtzu/awesome.git
