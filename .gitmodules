@@ -1,3 +1,0 @@
-[submodule "src/awesome"]
-	path = src/awesome
-	url = git@github.com:songtzu/awesome.git
