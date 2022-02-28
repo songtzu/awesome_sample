@@ -1,29 +1,20 @@
 package logic
 
 import (
-
+	"awesome"
+	"awesome/alog"
 	"awesome/anet"
 	"awesome/defs"
-	"awesome"
-
-	"awesome/alog"
+	"awesome/framework"
 )
 
 type AwesomeImplement struct{}
-
-
 
 func (AwesomeImplement)OnDispatchLogicMessage( roomCode defs.RoomCode, room *awesome.Room, user *awesome.Player, msg *anet.PackHead) (err error){
 	l,e:=user.SendPackage(msg)
 	alog.Debug(l,e)
 	user.LogInfo("OnDispatchLogicMessage====>",msg.Cmd,"the cmd:", string(msg.Body))
-	//alog.Trace("OnDispatchLogicMessage===>", string(msg.Body),"the cmd:", msg.Cmd)
-
 	return nil
-}
-
-func (AwesomeImplement)OnDispatchHallMessage(msg *anet.PackHead){
-
 }
 
 
@@ -48,4 +39,13 @@ func (AwesomeImplement)OnParseRoomCode(msg *anet.PackHead) (roomCode defs.RoomCo
 	return 0,nil
 }
 
+
+func (AwesomeImplement)OnInit() {
+}
+
+
+
+func (i AwesomeImplement) OnRegisterHttpRouters(e framework.Echo) {
+
+}
 
