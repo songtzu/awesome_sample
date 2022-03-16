@@ -6,6 +6,7 @@ import (
 	"awesome/anet"
 	"awesome/defs"
 	"awesome/framework"
+	"fmt"
 )
 
 type AwesomeImplement struct{}
@@ -41,6 +42,7 @@ func (AwesomeImplement)OnParseRoomCode(msg *anet.PackHead) (roomCode defs.RoomCo
 
 
 func (AwesomeImplement)OnInit() {
+	fmt.Println("awesome implement onInit")
 }
 
 
