@@ -4,6 +4,7 @@ import (
 	"awesome"
 	"awesome/alog"
 	"awesome/anet"
+	"awesome/awe_util"
 	"awesome/defs"
 	"awesome/framework"
 	"fmt"
@@ -45,9 +46,12 @@ func (AwesomeImplement)OnInit() {
 	fmt.Println("awesome implement onInit")
 }
 
-
+type UserData struct {
+	UID int64
+	NickName string
+}
 
 func (i AwesomeImplement) OnRegisterHttpRouters(e framework.Echo) {
-
+	awe_util.RegisHeaderType(UserData{})
 }
 
