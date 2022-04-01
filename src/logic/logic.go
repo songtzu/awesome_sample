@@ -4,7 +4,6 @@ import (
 	"awesome"
 	"awesome/alog"
 	"awesome/anet"
-	"awesome/awe_util"
 	"awesome/defs"
 	"awesome/framework"
 	"fmt"
@@ -52,6 +51,5 @@ type UserData struct {
 }
 
 func (i AwesomeImplement) OnRegisterHttpRouters(e framework.Echo) {
-	awe_util.RegisHeaderType(UserData{})
 }
 
