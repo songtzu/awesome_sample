@@ -6,7 +6,9 @@ import (
 	"awesome/anet"
 	"awesome/defs"
 	"awesome/framework"
+	"awesome/protocol"
 	"fmt"
+	"log"
 )
 
 type AwesomeImplement struct{}
@@ -51,5 +53,7 @@ type UserData struct {
 }
 
 func (i AwesomeImplement) OnRegisterHttpRouters(e framework.Echo) {
+	login := protocol.UserLogin{}
+	log.Println(login)
 }
 

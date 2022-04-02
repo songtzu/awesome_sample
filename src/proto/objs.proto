@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package protocol;
+option go_package ="../protocol";    //添加的代码
+
+//syntax = "proto3";
+message UserLogin {
+    optional uint32 UserId = 1; 
+    optional string UserName = 2; 
+    
+}
