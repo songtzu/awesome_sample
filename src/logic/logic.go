@@ -6,7 +6,7 @@ import (
 	"awesome/anet"
 	"awesome/defs"
 	"awesome/framework"
-	"awesome/protocol"
+	"awesome/pb_protocol"
 	"fmt"
 	"log"
 )
@@ -53,7 +53,31 @@ type UserData struct {
 }
 
 func (i AwesomeImplement) OnRegisterHttpRouters(e framework.Echo) {
-	login := protocol.UserLogin{}
+	login := pb_protocol.UserLogin{}
 	log.Println(login)
 }
 
+//
+//func (i AwesomeImplement) OnDispatchLogicMessage(roomCode defs.RoomCode, IRoom *framework.Room, user *framework.PlayerImpl, msg *anet.PackHead) (err error) {
+//	roomData, ok := IRoom.GetRoomData().(*room.Room)
+//	if !ok {
+//		//glog.Errorf("OnRoomMsgDispatch错误的参数类型 %v", reflect.TypeOf(IRoom.GetRoomData()), "msg.Cmd:", msg.Cmd)
+//		return errors.New("OnRoomMsgDispatch 房间数据类型不匹配")
+//	}
+//	if Exist(msg.Cmd) {
+//		hd := GetFunc(msg.Cmd)
+//		t := GetProto(msg.Cmd)
+//		v := reflect.New(t)
+//		if err := proto.Unmarshal(msg.Body, v.Interface().(proto.Message)); err == nil {
+//			res := hd.Call([]reflect.Value{reflect.ValueOf(roomData), v, reflect.ValueOf(user)})
+//			if !res[0].IsNil() {
+//				framework.SendUserMsg(user, res[1].Interface().(int), res[0].Interface())
+//			}
+//		} else {
+//			glog.Errorln("protocol  unmarshal fail: ", err)
+//		}
+//	} else {
+//		glog.Infof("not found command %d %s", msg.Cmd, pb_protocol.PbCmd(msg.Cmd).String())
+//	}
+//	return nil
+//}
