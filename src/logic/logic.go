@@ -13,6 +13,10 @@ import (
 
 type AwesomeImplement struct{}
 
+func (AwesomeImplement) OnMatchPlayers(players []*framework.PlayerImpl, isTimeout bool) {
+	log.Printf("自动匹配的回调事件,列表%v, 是否超时:%v", players, isTimeout)
+}
+
 func (AwesomeImplement)OnDispatchLogicMessage( roomCode defs.RoomCode, room *awesome.Room, user *awesome.Player, msg *anet.PackHead) (err error){
 	l,e:=user.SendPackage(msg)
 	alog.Debug(l,e)
@@ -64,9 +68,9 @@ func (i AwesomeImplement) OnRegisterHttpRouters(e framework.Echo) {
 //		//glog.Errorf("OnRoomMsgDispatch错误的参数类型 %v", reflect.TypeOf(IRoom.GetRoomData()), "msg.Cmd:", msg.Cmd)
 //		return errors.New("OnRoomMsgDispatch 房间数据类型不匹配")
 //	}
-//	if Exist(msg.Cmd) {
-//		hd := GetFunc(msg.Cmd)
-//		t := GetProto(msg.Cmd)
+//	if isCmdRouterExist(msg.Cmd) {
+//		hd := getRouterFunc(msg.Cmd)
+//		t := getCmdRouterProto(msg.Cmd)
 //		v := reflect.New(t)
 //		if err := proto.Unmarshal(msg.Body, v.Interface().(proto.Message)); err == nil {
 //			res := hd.Call([]reflect.Value{reflect.ValueOf(roomData), v, reflect.ValueOf(user)})
