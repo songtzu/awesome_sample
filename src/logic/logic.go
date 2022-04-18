@@ -41,9 +41,9 @@ func (AwesomeImplement)OnError(msg *anet.PackHead){
 }
 
 
-func (AwesomeImplement)OnParseRoomCode(msg *anet.PackHead) (roomCode defs.RoomCode,err error){
+func (AwesomeImplement)OnParseRoomCodeAndUser(msg *anet.PackHead) (roomCode defs.RoomCode, userId defs.TypeUserId ,err error){
 	alog.Debug("OnParseRoomCode===>", string(msg.Body),"the cmd:", msg.Cmd)
-	return 0,nil
+	return 0, 0,nil
 }
 
 
