@@ -41,9 +41,9 @@ func (AwesomeImplement)OnError(msg *anet.PackHead){
 }
 
 
-func (AwesomeImplement)OnParseRoomCodeAndUser(msg *anet.PackHead) (roomCode defs.RoomCode, userId defs.TypeUserId ,err error){
+func (AwesomeImplement)OnParseUser(msg *anet.PackHead) (roomCode defs.RoomCode, userId defs.TypeUserId, err error){
 	alog.Debug("OnParseRoomCode===>", string(msg.Body),"the cmd:", msg.Cmd)
-	return 0, 0,nil
+	return 0, 0, nil
 }
 
 
@@ -56,9 +56,14 @@ type UserData struct {
 	NickName string
 }
 
-func (i AwesomeImplement) OnRegisterHttpRouters(e framework.Echo) {
+func (AwesomeImplement) OnRegisterHttpRouters(e framework.Echo) {
 	login := pb_protocol.UserLogin{}
 	log.Println(login)
+}
+//	OnParseMatch(msg *anet.PackHead)(match *MatchRule, userId defs.TypeUserId)
+func (AwesomeImplement)	OnParseMatch(msg *anet.PackHead)(match *framework.MatchRule, userId defs.TypeUserId) {
+	log.Printf("解析是否是匹配请求, cmd:%d", msg.Cmd)
+	return nil, 0
 }
 
 //
