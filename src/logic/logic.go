@@ -8,6 +8,7 @@ import (
 	"awesome/framework"
 	"awesome/pb_protocol"
 	"fmt"
+	"http_logic"
 	"log"
 )
 
@@ -49,6 +50,7 @@ func (AwesomeImplement)OnParseUser(msg *anet.PackHead) (roomCode defs.RoomCode, 
 
 func (AwesomeImplement)OnInit() {
 	fmt.Println("awesome implement onInit")
+
 }
 
 type UserData struct {
@@ -57,7 +59,13 @@ type UserData struct {
 }
 
 func (AwesomeImplement) OnRegisterHttpRouters(e framework.Echo) {
+	log.Printf("OnRegisterHttpRouters===>")
 	login := pb_protocol.UserLogin{}
+	err := framework.RegisterHttpPostHandle("/api/user", http_logic.HandleUserPost )
+	err = framework.RegisterHttpGetWithSessionHandle("/api/test", http_logic.HandleUserGet, 30)
+	if err != nil {
+		return
+	}
 	log.Println(login)
 }
 //	OnParseMatch(msg *anet.PackHead)(match *MatchRule, userId defs.TypeUserId)
@@ -66,27 +74,3 @@ func (AwesomeImplement)	OnParseMatch(msg *anet.PackHead)(match *framework.MatchR
 	return nil, 0
 }
 
-//
-//func (i AwesomeImplement) OnDispatchLogicMessage(roomCode defs.RoomCode, IRoom *framework.Room, user *framework.PlayerImpl, msg *anet.PackHead) (err error) {
-//	roomData, ok := IRoom.GetRoomData().(*room.Room)
-//	if !ok {
-//		//glog.Errorf("OnRoomMsgDispatch错误的参数类型 %v", reflect.TypeOf(IRoom.GetRoomData()), "msg.Cmd:", msg.Cmd)
-//		return errors.New("OnRoomMsgDispatch 房间数据类型不匹配")
-//	}
-//	if isCmdRouterExist(msg.Cmd) {
-//		hd := getRouterFunc(msg.Cmd)
-//		t := getCmdRouterProto(msg.Cmd)
-//		v := reflect.New(t)
-//		if err := proto.Unmarshal(msg.Body, v.Interface().(proto.Message)); err == nil {
-//			res := hd.Call([]reflect.Value{reflect.ValueOf(roomData), v, reflect.ValueOf(user)})
-//			if !res[0].IsNil() {
-//				framework.SendUserMsg(user, res[1].Interface().(int), res[0].Interface())
-//			}
-//		} else {
-//			glog.Errorln("protocol  unmarshal fail: ", err)
-//		}
-//	} else {
-//		glog.Infof("not found command %d %s", msg.Cmd, pb_protocol.PbCmd(msg.Cmd).String())
-//	}
-//	return nil
-//}
